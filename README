@@ -1,0 +1,1 @@
+Get all images from a Shopify shop.
