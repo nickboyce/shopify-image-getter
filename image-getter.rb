@@ -2,11 +2,8 @@
 require 'hpricot'
 require 'open-uri'
 require 'net/http'
+require_relative 'config'
 
-# config
-@shopifyAPIKey = "b05b2f4088c15a88cf75a2a72f318ac2"
-@shopifyAPIPassword = "98549011183527258f8d6d45a8f100e9"
-@shopifyShopURL = "bholu.myshopify.com"
 @sizeArray = ["pico", "icon", "thumb", "small", "compact", "medium", "large", "grande", "original"]
 
 def saveXML(page=1)
@@ -59,6 +56,6 @@ def parseXML(doc)
 end
 
 # get the XML
-saveXML(2)
+saveXML()
 doc = Hpricot(open("products.xml"))
 parseXML(doc);
