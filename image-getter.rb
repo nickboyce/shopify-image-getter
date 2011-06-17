@@ -7,8 +7,9 @@ require_relative 'config'
 @sizeArray = ["pico", "icon", "thumb", "small", "compact", "medium", "large", "grande", "original"]
 
 def saveXML(page=1)
+  puts @shopifyShopURL
   Net::HTTP.start(@shopifyShopURL) {|http|
-    req = Net::HTTP::Get.new("/admin/products.xml?limit=250&page=2")
+    req = Net::HTTP::Get.new("/admin/products.xml?limit=250&page=#{page}")
     req.basic_auth @shopifyAPIKey, @shopifyAPIPassword
     response = http.request(req)
     # puts response.body into the file products.xml
@@ -32,7 +33,7 @@ end
 def parseXML(doc)
   doc.search("//image/src").each do |i|
     url = i.inner_text
-    # puts getURL(url, "compact")
+    puts getURL(url, "compact")
     filename = url[url.rindex("/")+1..url.rindex("?")-1]
     @sizeArray.each do |theSize|
       # create directory if it doesn't exist
